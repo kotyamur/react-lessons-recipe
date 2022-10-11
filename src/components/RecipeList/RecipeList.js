@@ -17,7 +17,7 @@ export const RecipeList = ({ recipes }) => {
 RecipeList.propTypes = {
   recipes: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.string.isRequired,
+      id: PropTypes.number.isRequired,
     })
   ),
 };
