@@ -9,3 +9,10 @@ export const Wraper = styled.div`
 export const Title = styled.h2`
   margin-bottom: ${p => p.theme.space[4]}px;
 `;
+
+export const Image = styled.img`
+  display: block;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+`;

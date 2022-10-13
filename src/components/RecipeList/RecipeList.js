@@ -1,16 +1,16 @@
 import PropTypes from 'prop-types';
 import { Recipe } from '../Recipe/Recipe';
-import { ListItem } from './RecipeList.styled';
+import { List } from './RecipeList.styled';
 
 export const RecipeList = ({ recipes }) => {
   return (
-    <ul>
+    <List>
       {recipes.map((recipe, idx) => (
-        <ListItem key={idx}>
+        <li key={idx}>
           <Recipe recipe={recipe} />
-        </ListItem>
+        </li>
       ))}
-    </ul>
+    </List>
   );
 };
 
