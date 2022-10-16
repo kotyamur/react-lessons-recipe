@@ -25,5 +25,9 @@ export const Button = styled.button`
     border-color 250ms ease-in-out;
   :hover {
     border-color: ${p => p.theme.colors.accent};
+    /* color: ${p => p.theme.colors.accent}; */
+  }
+  svg {
+    color: currentColor;
   }
 `;
