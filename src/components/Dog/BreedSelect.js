@@ -1,24 +1,18 @@
 import { Component } from 'react';
 import Select from 'react-select';
 import { fetchBreeds } from 'api';
-// export const BreedSelect = ({ breeds, onSelect }) => {
-//   const options = breeds.map(breed => ({
-//     value: breed.id,
-//     label: breed.name,
-//   }));
-//   return (
-//     <Select options={options} onChange={option => onSelect(option.value)} />
-//   );
-// };
+import { ErrorMessage } from './ErrorMessage';
 
 export class BreedSelect extends Component {
   state = {
     breeds: [],
     error: null,
+    isLoading: false,
   };
 
   async componentDidMount() {
     try {
+      this.setState({ isLoading: true });
       const breeds = await fetchBreeds();
       this.setState({ breeds: breeds });
     } catch {
@@ -26,6 +20,8 @@ export class BreedSelect extends Component {
         error:
           'Мы не смогли загрузить породы собачек, пожалуйста перезагрузите страницу чтобы попробовать еще раз',
       });
+    } finally {
+      this.setState({ isLoading: false });
     }
   }
 
@@ -38,12 +34,16 @@ export class BreedSelect extends Component {
 
   render() {
     const { onSelect } = this.props;
-    const { error } = this.state;
+    const { error, isLoading } = this.state;
     const options = this.buildOptions();
     return (
       <>
-        <Select options={options} onChange={option => onSelect(option.value)} />
-        {error && <div>{error}</div>}
+        <Select
+          options={options}
+          isLoading={isLoading}
+          onChange={option => onSelect(option.value)}
+        />
+        {error && <ErrorMessage>{error}</ErrorMessage>}
       </>
     );
   }

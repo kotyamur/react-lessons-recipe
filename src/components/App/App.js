@@ -1,6 +1,8 @@
 import { Component } from 'react';
 // import ClipLoader from 'react-spinners/ClipLoader';
 import { DogSkeleton } from '../Dog/DogSkeleton';
+import { ErrorMessage } from '../Dog/ErrorMessage';
+import { Layout } from './Layout';
 
 import { fetchDogByBreed } from 'api';
 import { Dog } from '../Dog/Dog';
@@ -16,17 +18,6 @@ export class App extends Component {
     error: null,
     isLoading: false,
   };
-  // async componentDidMount() {
-  //   try {
-  //     const breeds = await fetchBreeds();
-  //     this.setState({ breeds: breeds });
-  //   } catch {
-  //     this.setState({
-  //       error:
-  //         'Мы не смогли загрузить породы собачек, пожалуйста перезагрузите страницу чтобы попробовать еще раз',
-  //     });
-  //   }
-  // }
 
   selectBreed = async breedId => {
     try {
@@ -43,11 +34,11 @@ export class App extends Component {
   render() {
     const { dog, error, isLoading } = this.state;
     return (
-      <>
+      <Layout>
         {/* <RecipeList recipes={recipes} /> */}
         {/* <PaymentWidget /> */}
         <BreedSelect onSelect={this.selectBreed} />
-        {error && <div>{error}</div>}
+        {error && <ErrorMessage>{error}</ErrorMessage>}
         {isLoading && <div>Loading...</div>}
         {isLoading && <DogSkeleton />}
 
@@ -59,7 +50,7 @@ export class App extends Component {
           data-testid="loader"
         /> */}
         {dog && !isLoading && <Dog dog={dog} />}
-      </>
+      </Layout>
     );
   }
 }
