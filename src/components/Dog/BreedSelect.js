@@ -2,6 +2,7 @@ import { Component } from 'react';
 import Select from 'react-select';
 import { fetchBreeds } from 'api';
 import { ErrorMessage } from './ErrorMessage';
+import { errorMessages } from './constns';
 
 export class BreedSelect extends Component {
   state = {
@@ -17,8 +18,7 @@ export class BreedSelect extends Component {
       this.setState({ breeds: breeds });
     } catch {
       this.setState({
-        error:
-          'Мы не смогли загрузить породы собачек, пожалуйста перезагрузите страницу чтобы попробовать еще раз',
+        error: errorMessages.fetchBreeds,
       });
     } finally {
       this.setState({ isLoading: false });

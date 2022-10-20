@@ -7,6 +7,7 @@ import { Layout } from './Layout';
 import { fetchDogByBreed } from 'api';
 import { Dog } from '../Dog/Dog';
 import { BreedSelect } from '../Dog/BreedSelect';
+import { errorMessages } from '../Dog/constns';
 // import recipes from '../../recipes.json';
 // import { RecipeList } from '../RecipeList/RecipeList';
 // import { PaymentWidget } from '../PaymentWidget/PaymentWidget';
@@ -25,7 +26,7 @@ export class App extends Component {
       const dog = await fetchDogByBreed(breedId);
       this.setState({ dog });
     } catch {
-      this.setState({ error: 'Ops, dog is not founded 😢, please try again!' });
+      this.setState({ error: errorMessages.fetchDog });
     } finally {
       this.setState({ isLoading: false });
     }
